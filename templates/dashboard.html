@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Parking System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <i class="fas fa-parking"></i>
+        <h1>Smart Parking System</h1>
+      </div>
+      <p class="subtitle">Real-time parking management solution</p>
+      <div id="digital-clock" class="digital-clock"></div>
+    </header>
+
+    <div id="assignment-section" class="assignment-section">
+      <h2>Your Assigned Parking Spot</h2>
+      <div id="assigned-spot" class="assigned-spot">--</div>
+      <p class="directions" id="directions">Please proceed to the displayed spot number.</p>
+    </div>
+
+    <div class="status-summary">
+      <div class="status-card free">
+        <i class="fas fa-check-circle icon"></i>
+        <h3>Available Spots</h3>
+        <div id="free-count" class="count">{{ slots.free_slots|length }}</div>
+        <p>Ready to park</p>
+      </div>
+      <div class="status-card occupied">
+        <i class="fas fa-car icon"></i>
+        <h3>Occupied Spots</h3>
+        <div id="occupied-count" class="count">{{ slots.occupied_slots|length }}</div>
+        <p>Currently in use</p>
+      </div>
+      <div class="status-card waiting">
+        <i class="fas fa-clock icon"></i>
+        <h3>Waiting Spots</h3>
+        <div id="waiting-count" class="count">{{ slots.waiting_slots|length }}</div>
+        <p>Being processed</p>
+      </div>
+    </div>
+
+    <div class="parking-section">
+      <h2><i class="fas fa-map-marked-alt"></i> Parking Map</h2>
+      
+      <div class="parking-legend">
+        <div class="legend-item">
+          <div class="legend-color available"></div>
+          <span>Available</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color occupied"></div>
+          <span>Occupied</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color waiting"></div>
+          <span>Waiting</span>
+        </div>
+      </div>
+
+      <div class="entry-exit">
+        <div class="entry">Entry <i class="fas fa-arrow-down"></i></div>
+        <div class="exit"><i class="fas fa-arrow-up"></i> Exit</div>
+      </div>
+
+      <div class="parking-layout" id="parking-layout">
+        <!-- Parking spots will be dynamically added here -->
+        <div class="floor-divider">Ground Floor</div>
+      </div>
+    </div>
+    
+    <footer>
+      <div id="last-updated">Last updated: {{ now.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+      <div>© 2025 Smart Parking System | All Rights Reserved</div>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
